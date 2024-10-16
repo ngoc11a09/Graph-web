@@ -14,6 +14,9 @@ function FloatingConnectionLine({
     return null;
   }
 
+  if (!toNode) {
+    return null;
+  }
   const { sx, sy } = getEdgeParams(fromNode, toNode);
   const [edgePath] = getBezierPath({
     sourceX: sx,
