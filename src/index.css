@@ -10,3 +10,18 @@ body,
   height: 100%;
   margin: 0;
 }
+
+.floatingedges {
+  display: flex;
+  flex-grow: .5;
+  border: 1px solid #000000;
+}
+
+.floatingedges .react-flow__handle {
+  opacity: 0;
+}
+
+.input-graph {
+  display: flex;
+  height: 75%;
+}
