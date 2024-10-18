@@ -3,14 +3,21 @@ import FloatingEdge from "../edges/FloatingEdge";
 import FloatingConnectionLine from "../edges/FloatingConnectionLine";
 import { createNodesAndEdges } from "../utils/edge.util";
 import { InputType } from "../types/InputType";
-import { generatePath } from "../edges";
+import { generatePathDijkstra, generatePathTSP } from "../edges";
 
+enum AlgorithmsEnum {
+  TSP = "TSP",
+  Dijkstra = "Dijkstra",
+}
+
+type Algorithms = "TSP" | "Dijkstra";
 interface GraphProps {
   inputValue?: InputType;
   outputValue?: Array<number>;
+  algo?: Algorithms;
 }
 
-const Graph: React.FC<GraphProps> = ({ inputValue, outputValue }) => {
+const Graph: React.FC<GraphProps> = ({ inputValue, outputValue, algo }) => {
   const isRes: boolean = !!outputValue;
   const { nodes: initialNodes, edges: initialEdges } = createNodesAndEdges(
     inputValue as InputType,
@@ -19,7 +26,18 @@ const Graph: React.FC<GraphProps> = ({ inputValue, outputValue }) => {
 
   if (outputValue) {
     initialEdges.length = 0;
-    initialEdges.push(...generatePath(outputValue, inputValue as InputType));
+
+    if (algo === AlgorithmsEnum.TSP) {
+      initialEdges.push(
+        ...generatePathTSP(outputValue, inputValue as InputType)
+      );
+    }
+
+    if (algo === AlgorithmsEnum.Dijkstra) {
+      initialEdges.push(
+        ...generatePathDijkstra(outputValue, inputValue as InputType)
+      );
+    }
   }
 
   const edgeTypes = {

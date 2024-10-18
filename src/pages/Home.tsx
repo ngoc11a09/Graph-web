@@ -4,6 +4,7 @@ const Home = () => {
   return (
     <div>
       <Link to="/tsp">TSP solver</Link>
+      <Link to="/dijkstra">Dijkstra solver</Link>
     </div>
   );
 };
