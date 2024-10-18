@@ -7,6 +7,7 @@ export const transformInput = (
 ): OptionalInputType => {
   const validateInput = (n: number, input: Array<Array<number>>) => {
     if (n > MAX_N) throw new Error("Ma trận quá lớn");
+    if (n < 1) throw new Error("Ma trận quá nhỏ");
 
     for (const [index, line] of input.entries()) {
       if (line.length !== n)
@@ -30,7 +31,6 @@ export const transformInput = (
   setTextValue(input);
   if (!input) {
     throw new Error("Không có dữ liệu");
-    return undefined;
   }
   const arr: number[][] = input
     .split("\n")
