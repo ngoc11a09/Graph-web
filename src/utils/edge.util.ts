@@ -82,8 +82,8 @@ export function getEdgeParams(
   };
 }
 
-export function createNodesAndEdges(inputValue: InputType) {
-  const nodes = initialNodes(inputValue);
+export function createNodesAndEdges(inputValue: InputType, isRes: boolean) {
+  const nodes = initialNodes(inputValue, isRes);
   const edges = initialEdges(inputValue);
 
   return { nodes, edges };

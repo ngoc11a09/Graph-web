@@ -3,3 +3,5 @@ export interface InputType {
   start: number;
   arr: number[][];
 }
+
+export type OptionalInputType = InputType | undefined;

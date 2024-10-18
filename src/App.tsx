@@ -1,45 +1,17 @@
-import "@xyflow/react/dist/style.css";
+import { Suspense } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import TSPPage from "./pages/TSPPage";
 
-import "./index.css";
-// import BaBTree from "./components/BaBTree";
-import FormInput from "./components/FormInput";
-import Graph from "./components/Graph";
-import { useEffect, useRef, useState } from "react";
-import { InputType } from "./types/InputType";
-import { TSP } from "./algoritm/TSP";
+const App = () => (
+  <Router>
+    <Suspense fallback={<div>Loading...</div>}>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/tsp" element={<TSPPage />} />
+      </Routes>
+    </Suspense>
+  </Router>
+);
 
-export default function NodeAsHandleFlow() {
-  const [inputValue, setInputValue] = useState<InputType>();
-  const [outputValue, setOutputValue] = useState<Array<number>>();
-  const [totalCost, setTotalCost] = useState(0);
-  const temp = useRef<number>(0);
-
-  useEffect(() => {
-    if (inputValue) {
-      if (inputValue) {
-        const tsp = new TSP(inputValue.n, inputValue.start, inputValue.arr);
-        const res = tsp.solver();
-        setOutputValue(res.path);
-        setTotalCost(res.totalCost);
-      }
-    }
-  }, [inputValue]);
-
-  const handleInputChange = (value: InputType) => {
-    setInputValue(value);
-    temp.current++;
-  };
-
-  return (
-    <>
-      <FormInput setInputValue={handleInputChange} />
-      <div>The result is {totalCost}</div>
-      {inputValue && (
-        <div className="input-graph" key={temp.current}>
-          <Graph inputValue={inputValue} />
-          <Graph inputValue={inputValue} outputValue={outputValue} />
-        </div>
-      )}
-    </>
-  );
-}
+export default App;

@@ -1,15 +1,20 @@
-"use client";
-import { useId } from "react";
+import { useId, useState, ChangeEvent } from "react";
 import { transformInput } from "../utils/convertInput";
-import { InputType } from "../types/InputType";
+import { OptionalInputType } from "../types/InputType";
 
 interface FormInputProps {
-  inputValue?: InputType;
-  setInputValue: (value: InputType) => void;
+  inputValue?: OptionalInputType;
+  setInputValue: (value: OptionalInputType) => void;
 }
 
 export default function FormInput({ setInputValue }: FormInputProps) {
+  const [error, setError] = useState("");
+  const [textValue, setTextValue] = useState("");
   const inputAreaId = useId();
+
+  const onChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    setTextValue(e.target.value);
+  };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -18,9 +23,19 @@ export default function FormInput({ setInputValue }: FormInputProps) {
     const formData = new FormData(form);
 
     const formJson = Object.fromEntries(formData.entries());
-
-    const input: InputType = transformInput(formJson.data as string);
-    setInputValue(input);
+    try {
+      const input: OptionalInputType = transformInput(
+        formJson.data as string,
+        setTextValue
+      );
+      setInputValue(input);
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message);
+      } else {
+        setError("An error occurred");
+      }
+    }
   };
 
   return (
@@ -35,11 +50,18 @@ export default function FormInput({ setInputValue }: FormInputProps) {
           rows={5}
           cols={40}
           autoFocus={true}
+          value={textValue}
+          onChange={onChangeInput}
         />
+        {error && <p className="text-sm text-red-600">{error}</p>}
         <hr />
         <div>
-          <button type="reset">Reset</button>
-          <button type="submit">Save</button>
+          <button className="m-8" type="reset">
+            Reset
+          </button>
+          <button className="m-8" type="submit">
+            Save
+          </button>
         </div>
       </form>
     </div>

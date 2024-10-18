@@ -4,19 +4,19 @@ import { PositionLoggerNode } from "./PositionLoggerNode";
 import { AppNode } from "./types";
 import { InputType } from "../types/InputType";
 
-const nodeDefaults = {
-  style: {
-    borderRadius: "100%",
-    backgroundColor: "#fff",
-    width: 30,
-    height: 30,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-};
-
-const initialNodes = (inputValue: InputType): AppNode[] => {
+const initialNodes = (inputValue: InputType, isRes: boolean): AppNode[] => {
+  const nodeDefaults = {
+    style: {
+      borderRadius: "100%",
+      backgroundColor: "#fff",
+      width: 30,
+      height: 30,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      ...(isRes ? { border: "1px solid #FF0072" } : {}),
+    },
+  };
   const nodes: AppNode[] = [];
   if (inputValue) {
     for (let i = 0; i < inputValue.n; i++) {

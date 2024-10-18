@@ -11,8 +11,10 @@ interface GraphProps {
 }
 
 const Graph: React.FC<GraphProps> = ({ inputValue, outputValue }) => {
+  const isRes: boolean = !!outputValue;
   const { nodes: initialNodes, edges: initialEdges } = createNodesAndEdges(
-    inputValue as InputType
+    inputValue as InputType,
+    isRes as boolean
   );
 
   if (outputValue) {
@@ -35,6 +37,10 @@ const Graph: React.FC<GraphProps> = ({ inputValue, outputValue }) => {
         fitView
         edgeTypes={edgeTypes}
         connectionLineComponent={FloatingConnectionLine}
+        edgesFocusable={false}
+        nodesFocusable={false}
+        nodesConnectable={false}
+        elementsSelectable={false}
       ></ReactFlow>
     </div>
   );
