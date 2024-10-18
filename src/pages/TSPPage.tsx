@@ -17,8 +17,6 @@ export default function TSPPage() {
       setOutputValue(res.path);
       setTotalCost(res.totalCost);
     }
-    console.log("inputValue", inputValue);
-    console.log("outputValue", outputValue);
   }, [inputValue]);
 
   const handleInputChange = (value: OptionalInputType) => {
