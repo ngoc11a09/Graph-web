@@ -42,9 +42,9 @@ export class Dijkstra {
     }
     let totalCost = 0;
     for (let i = 0; i < this.n; i++) {
-      if (this.path[i] !== -1 && this.path[i] !== this.maxInt) {
-        totalCost += this.arr[i][this.path[i]];
-      }
+      if (this.path[i] === -1) continue;
+
+      totalCost += this.arr[i][this.path[i]];
     }
 
     return { totalCost, path: this.path };

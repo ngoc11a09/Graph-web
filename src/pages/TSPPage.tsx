@@ -31,7 +31,7 @@ export default function TSPPage() {
       {inputValue && (
         <div className="input-graph" key={temp.current}>
           <Graph inputValue={inputValue} />
-          <Graph inputValue={inputValue} outputValue={outputValue} />
+          <Graph inputValue={inputValue} outputValue={outputValue} algo="TSP" />
         </div>
       )}
     </>

@@ -1,7 +1,8 @@
-import { InternalNode, Node, Position } from "@xyflow/react";
+import { Edge, InternalNode, Node, Position } from "@xyflow/react";
 import initialNodes from "../nodes";
-import initialEdges from "../edges";
+import initialEdges, { generatePathDijkstra, generatePathTSP } from "../edges";
 import { InputType } from "../types/InputType";
+import { Algorithms, AlgorithmsEnum } from "../components/Graph";
 
 // this helper function returns the intersection point
 // of the line between the center of the intersectionNode and the target node
@@ -82,9 +83,27 @@ export function getEdgeParams(
   };
 }
 
-export function createNodesAndEdges(inputValue: InputType, isRes: boolean) {
+export function createNodesAndEdges(
+  inputValue: InputType,
+  isRes: boolean,
+  isDigraph: boolean,
+  outputValue: Array<number>,
+  algo: Algorithms
+) {
   const nodes = initialNodes(inputValue, isRes);
-  const edges = initialEdges(inputValue);
-
+  let edges: Edge[] = [];
+  if (isRes) {
+    if (outputValue) {
+      if (algo === AlgorithmsEnum.TSP) {
+        edges = generatePathTSP(outputValue, inputValue as InputType);
+      } else if (algo === AlgorithmsEnum.Dijkstra) {
+        edges = generatePathDijkstra(
+          outputValue,
+          inputValue as InputType,
+          isDigraph as boolean
+        );
+      }
+    }
+  } else edges = initialEdges(inputValue, isDigraph);
   return { nodes, edges };
 }

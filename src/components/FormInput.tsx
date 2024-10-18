@@ -5,6 +5,8 @@ import { OptionalInputType } from "../types/InputType";
 interface FormInputProps {
   inputValue?: OptionalInputType;
   setInputValue: (value: OptionalInputType) => void;
+  setIsDigraph: (value: boolean) => void;
+  isDigraph: boolean;
 }
 
 export default function FormInput({ setInputValue }: FormInputProps) {
@@ -29,6 +31,7 @@ export default function FormInput({ setInputValue }: FormInputProps) {
         setTextValue
       );
       setInputValue(input);
+      setError("");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -40,7 +43,15 @@ export default function FormInput({ setInputValue }: FormInputProps) {
 
   return (
     <div>
-      <form method="post" onSubmit={handleSubmit}>
+      <form
+        method="post"
+        onSubmit={handleSubmit}
+        onReset={() => {
+          setTextValue("");
+          setError("");
+        }}
+      >
+        <div></div>
         <div>
           <label htmlFor={inputAreaId}>Input:</label>
         </div>

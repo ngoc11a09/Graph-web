@@ -24,6 +24,7 @@ const FloatingEdge: FC<EdgeProps<FloatingEdge>> = ({
   target,
   style,
   data,
+  markerEnd,
 }) => {
   const sourceNode = useInternalNode(source);
   const targetNode = useInternalNode(target);
@@ -47,6 +48,7 @@ const FloatingEdge: FC<EdgeProps<FloatingEdge>> = ({
         id={id}
         path={edgePath}
         style={style}
+        markerEnd={markerEnd}
         label={data?.label}
         labelX={labelX}
         labelY={labelY}

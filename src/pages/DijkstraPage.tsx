@@ -8,6 +8,8 @@ export default function DijkstraPage() {
   const [inputValue, setInputValue] = useState<OptionalInputType>();
   const [outputValue, setOutputValue] = useState<Array<number>>();
   const [totalCost, setTotalCost] = useState(0);
+  const [isDigraph, setIsDigraph] = useState(false);
+
   const temp = useRef<number>(0);
 
   useEffect(() => {
@@ -30,14 +32,26 @@ export default function DijkstraPage() {
 
   return (
     <>
-      <FormInput setInputValue={handleInputChange} />
+      <div
+        onClick={() => {
+          setIsDigraph(!isDigraph);
+        }}
+      >
+        {isDigraph ? "Co huong" : "Vo huong"}
+      </div>
+      <FormInput
+        setInputValue={handleInputChange}
+        setIsDigraph={setIsDigraph}
+        isDigraph={isDigraph}
+      />
       <div>The result is {totalCost}</div>
       {inputValue && (
         <div className="input-graph" key={temp.current}>
-          <Graph inputValue={inputValue} />
+          <Graph inputValue={inputValue} isDigraph={isDigraph} />
           <Graph
             inputValue={inputValue}
             outputValue={outputValue}
+            isDigraph={isDigraph}
             algo="Dijkstra"
           />
         </div>

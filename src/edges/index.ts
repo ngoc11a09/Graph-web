@@ -1,20 +1,29 @@
 import { MarkerType, type Edge, type EdgeTypes } from "@xyflow/react";
 import { InputType } from "../types/InputType";
 
-const initialEdges = (inputValue: InputType): Edge[] => {
+const initialEdges = (inputValue: InputType, isDigraph: boolean): Edge[] => {
   const edges: Edge[] = [];
   if (inputValue) {
     const dataArr: number[][] = inputValue?.arr;
     for (let i = 0; i < inputValue.n; i++) {
       for (let j = 0; j < inputValue.n; j++) {
         if (dataArr?.[i][j] !== 0 && i != j) {
-          edges.push({
+          const edge: Edge = {
             id: `${i}${j}`,
             source: `${i}`,
             target: `${j}`,
             data: { label: `${dataArr?.[i][j]}` },
             type: "floating",
-          });
+          };
+          if (isDigraph) {
+            edge.markerEnd = {
+              type: MarkerType.ArrowClosed,
+              width: 20,
+              height: 20,
+            };
+          }
+
+          edges.push(edge);
         }
       }
     }
@@ -27,6 +36,7 @@ export const generatePathTSP = (
   inputValue: InputType
 ): Edge[] => {
   const edges: Edge[] = [];
+
   if (outputValue) {
     const dataArr: number[][] = inputValue.arr;
 
@@ -35,12 +45,6 @@ export const generatePathTSP = (
         id: `${outputValue[i]}${outputValue[i + 1]}`,
         source: `${outputValue[i]}`,
         target: `${outputValue[i + 1]}`,
-        markerEnd: {
-          type: MarkerType.ArrowClosed,
-          width: 20,
-          height: 20,
-          color: "#FF0072",
-        },
         data: {
           label: `${dataArr?.[outputValue?.[i]]?.[outputValue?.[i + 1]]}`,
         },
@@ -58,9 +62,11 @@ export const generatePathTSP = (
 
 export const generatePathDijkstra = (
   outputValue: Array<number>,
-  inputValue: InputType
+  inputValue: InputType,
+  isDigraph: boolean
 ): Edge[] => {
   const edges: Edge[] = [];
+
   if (outputValue) {
     const dataArr: number[][] = inputValue.arr;
 
@@ -68,17 +74,10 @@ export const generatePathDijkstra = (
       if (outputValue[i] === -1 || outputValue[i + 1] === 999999) {
         continue;
       }
-
-      edges.push({
+      const edge: Edge = {
         id: `${outputValue[i]}${i}`,
         source: `${i}`,
         target: `${outputValue[i]}`,
-        markerEnd: {
-          type: MarkerType.ArrowClosed,
-          width: 20,
-          height: 20,
-          color: "#FF0072",
-        },
         data: {
           label: `${dataArr?.[outputValue?.[i]]?.[i]}`,
         },
@@ -87,10 +86,18 @@ export const generatePathDijkstra = (
           strokeWidth: 2,
           stroke: "#FF0072",
         },
-      });
+      };
+      if (isDigraph) {
+        edge.markerEnd = {
+          type: MarkerType.ArrowClosed,
+          width: 10,
+          height: 10,
+          color: "#FF0072",
+        };
+      }
+      edges.push(edge);
     }
   }
-
   return edges;
 };
 
