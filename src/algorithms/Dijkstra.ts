@@ -37,7 +37,6 @@ export class Dijkstra {
         ) {
           this.cost[v] = this.cost[u] + this.arr[u][v];
           this.path[v] = u;
-          console.log(u, "->", v, this.cost[v]);
         }
       }
     }
@@ -45,10 +44,8 @@ export class Dijkstra {
     for (let i = 0; i < this.n; i++) {
       if (this.path[i] !== -1 && this.path[i] !== this.maxInt) {
         totalCost += this.arr[i][this.path[i]];
-        console.log(i, "->", this.path[i], this.arr[i][this.path[i]]);
       }
     }
-    console.log({ totalCost, path: this.path });
 
     return { totalCost, path: this.path };
   };
