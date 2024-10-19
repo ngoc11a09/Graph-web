@@ -4,6 +4,7 @@ import FloatingConnectionLine from "../edges/FloatingConnectionLine";
 import { createNodesAndEdges } from "../utils/edge.util";
 import { InputType } from "../types/InputType";
 
+// eslint-disable-next-line react-refresh/only-export-components
 export enum AlgorithmsEnum {
   TSP = "TSP",
   Dijkstra = "Dijkstra",
