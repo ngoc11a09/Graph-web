@@ -5,7 +5,7 @@ import { OptionalInputType } from "../types/InputType";
 interface FormInputProps {
   inputValue?: OptionalInputType;
   setInputValue: (value: OptionalInputType) => void;
-  setIsDigraph: (value: boolean) => void;
+  setIsDigraph?: (value: boolean) => void;
   isDigraph: boolean;
 }
 

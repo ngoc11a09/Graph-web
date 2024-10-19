@@ -75,9 +75,50 @@ export const generatePathDijkstra = (
         continue;
       }
       const edge: Edge = {
-        id: `${outputValue[i]}${i}`,
-        source: `${i}`,
-        target: `${outputValue[i]}`,
+        id: `${i}${outputValue[i]}`,
+        source: `${outputValue[i]}`,
+        target: `${i}`,
+        data: {
+          label: `${dataArr?.[outputValue?.[i]]?.[i]}`,
+        },
+        type: "floating",
+        style: {
+          strokeWidth: 2,
+          stroke: "#FF0072",
+        },
+      };
+      if (isDigraph) {
+        edge.markerEnd = {
+          type: MarkerType.ArrowClosed,
+          width: 10,
+          height: 10,
+          color: "#FF0072",
+        };
+      }
+      edges.push(edge);
+    }
+  }
+  return edges;
+};
+
+export const generatePathDFS = (
+  outputValue: Array<number>,
+  inputValue: InputType,
+  isDigraph: boolean
+): Edge[] => {
+  const edges: Edge[] = [];
+
+  if (outputValue) {
+    const dataArr: number[][] = inputValue.arr;
+
+    for (let i = 0; i < outputValue.length; i++) {
+      if (outputValue[i] === -1 || outputValue[i + 1] === 999999) {
+        continue;
+      }
+      const edge: Edge = {
+        id: `${i}${outputValue[i]}`,
+        source: `${outputValue[i]}`,
+        target: `${i}`,
         data: {
           label: `${dataArr?.[outputValue?.[i]]?.[i]}`,
         },

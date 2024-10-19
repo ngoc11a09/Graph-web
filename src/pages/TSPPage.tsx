@@ -26,7 +26,7 @@ export default function TSPPage() {
 
   return (
     <>
-      <FormInput setInputValue={handleInputChange} />
+      <FormInput setInputValue={handleInputChange} isDigraph={false} />
       <div>The result is {totalCost}</div>
       {inputValue && (
         <div className="input-graph" key={temp.current}>

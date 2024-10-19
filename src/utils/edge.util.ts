@@ -1,6 +1,10 @@
 import { Edge, InternalNode, Node, Position } from "@xyflow/react";
 import initialNodes from "../nodes";
-import initialEdges, { generatePathDijkstra, generatePathTSP } from "../edges";
+import initialEdges, {
+  generatePathDFS,
+  generatePathDijkstra,
+  generatePathTSP,
+} from "../edges";
 import { InputType } from "../types/InputType";
 import { Algorithms, AlgorithmsEnum } from "../components/Graph";
 
@@ -98,6 +102,12 @@ export function createNodesAndEdges(
         edges = generatePathTSP(outputValue, inputValue as InputType);
       } else if (algo === AlgorithmsEnum.Dijkstra) {
         edges = generatePathDijkstra(
+          outputValue,
+          inputValue as InputType,
+          isDigraph as boolean
+        );
+      } else if (algo === AlgorithmsEnum.DFS) {
+        edges = generatePathDFS(
           outputValue,
           inputValue as InputType,
           isDigraph as boolean

@@ -7,9 +7,10 @@ import { InputType } from "../types/InputType";
 export enum AlgorithmsEnum {
   TSP = "TSP",
   Dijkstra = "Dijkstra",
+  DFS = "DFS",
 }
 
-export type Algorithms = "TSP" | "Dijkstra";
+export type Algorithms = "TSP" | "Dijkstra" | "DFS";
 interface GraphProps {
   inputValue?: InputType;
   outputValue?: Array<number>;
