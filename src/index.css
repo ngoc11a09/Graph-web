@@ -14,7 +14,6 @@ body,
 .floatingedges {
   display: flex;
   flex-grow: .5;
-  border: 1px solid #000000;
 }
 
 .floatingedges .react-flow__handle {

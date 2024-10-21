@@ -1,7 +1,10 @@
 import { MarkerType, type Edge, type EdgeTypes } from "@xyflow/react";
 import { InputType } from "../types/InputType";
 
+const graphColor: string = `#${import.meta.env.VITE_GRAPH_COLOR}`;
+
 const initialEdges = (inputValue: InputType, isDigraph: boolean): Edge[] => {
+  console.log("graphColor", graphColor);
   const edges: Edge[] = [];
   if (inputValue) {
     const dataArr: number[][] = inputValue?.arr;
@@ -51,11 +54,12 @@ export const generatePathTSP = (
         type: "floating",
         style: {
           strokeWidth: 2,
-          stroke: "#FF0072",
+          stroke: graphColor,
         },
       });
     }
   }
+  console.log("edges", edges);
 
   return edges;
 };
@@ -84,7 +88,7 @@ export const generatePathDijkstra = (
         type: "floating",
         style: {
           strokeWidth: 2,
-          stroke: "#FF0072",
+          stroke: graphColor,
         },
       };
       if (isDigraph) {
@@ -92,7 +96,7 @@ export const generatePathDijkstra = (
           type: MarkerType.ArrowClosed,
           width: 10,
           height: 10,
-          color: "#FF0072",
+          color: graphColor,
         };
       }
       edges.push(edge);
@@ -125,7 +129,7 @@ export const generatePathDFS = (
         type: "floating",
         style: {
           strokeWidth: 2,
-          stroke: "#FF0072",
+          stroke: graphColor,
         },
       };
       if (isDigraph) {
@@ -133,7 +137,7 @@ export const generatePathDFS = (
           type: MarkerType.ArrowClosed,
           width: 10,
           height: 10,
-          color: "#FF0072",
+          color: graphColor,
         };
       }
       edges.push(edge);

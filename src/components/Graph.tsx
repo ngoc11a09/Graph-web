@@ -40,21 +40,20 @@ const Graph: React.FC<GraphProps> = ({
   const [nodes, , onNodesChange] = useNodesState(initialNodes);
   const [edges, , onEdgesChange] = useEdgesState(initialEdges);
   return (
-    <div className="floatingedges">
-      <ReactFlow
-        nodes={nodes}
-        edges={edges}
-        onNodesChange={onNodesChange}
-        onEdgesChange={onEdgesChange}
-        fitView
-        edgeTypes={edgeTypes}
-        connectionLineComponent={FloatingConnectionLine}
-        edgesFocusable={false}
-        nodesFocusable={false}
-        nodesConnectable={false}
-        elementsSelectable={false}
-      ></ReactFlow>
-    </div>
+    <ReactFlow
+      className="h-full floatingedges"
+      nodes={nodes}
+      edges={edges}
+      onNodesChange={onNodesChange}
+      onEdgesChange={onEdgesChange}
+      fitView
+      edgeTypes={edgeTypes}
+      connectionLineComponent={FloatingConnectionLine}
+      edgesFocusable={false}
+      nodesFocusable={false}
+      nodesConnectable={false}
+      elementsSelectable={false}
+    ></ReactFlow>
   );
 };
 export default Graph;

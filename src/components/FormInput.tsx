@@ -1,6 +1,8 @@
 import { useId, useState, ChangeEvent } from "react";
 import { transformInput } from "../utils/convertInput";
 import { OptionalInputType } from "../types/InputType";
+import TextField from "@mui/material/TextField";
+import { Button, FormHelperText, Stack } from "@mui/material";
 
 interface FormInputProps {
   inputValue?: OptionalInputType;
@@ -10,7 +12,7 @@ interface FormInputProps {
 }
 
 export default function FormInput({ setInputValue }: FormInputProps) {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(" ");
   const [textValue, setTextValue] = useState("");
   const inputAreaId = useId();
 
@@ -31,7 +33,7 @@ export default function FormInput({ setInputValue }: FormInputProps) {
         setTextValue
       );
       setInputValue(input);
-      setError("");
+      setError(" ");
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -41,40 +43,65 @@ export default function FormInput({ setInputValue }: FormInputProps) {
     }
   };
 
+  function HelperText() {
+    if (error)
+      return (
+        <FormHelperText margin="dense" error={true}>
+          {error}
+        </FormHelperText>
+      );
+  }
+
   return (
-    <div>
+    <Stack sx={{ width: 1 / 2 }}>
       <form
         method="post"
         onSubmit={handleSubmit}
         onReset={() => {
           setTextValue("");
-          setError("");
+          setError(" ");
         }}
+        className="flex flex-col"
       >
-        <div></div>
-        <div>
-          <label htmlFor={inputAreaId}>Input:</label>
-        </div>
-        <textarea
+        <TextField
           id={inputAreaId}
+          label="Đầu vào"
           name="data"
-          rows={5}
-          cols={40}
-          autoFocus={true}
+          multiline
+          rows={8}
+          color="secondary"
+          focused
           value={textValue}
           onChange={onChangeInput}
+          placeholder="VD:
+4 0
+0 10 15 20
+10 0 35 25
+15 35 0 30
+20 25 30 0"
         />
-        {error && <p className="text-sm text-red-600">{error}</p>}
-        <hr />
-        <div>
-          <button className="m-8" type="reset">
-            Reset
-          </button>
-          <button className="m-8" type="submit">
-            Save
-          </button>
-        </div>
+        <HelperText />
+        <Stack direction="row" spacing={2} sx={{ my: 2 }}>
+          <Button
+            className="px-4 py-2"
+            type="reset"
+            variant="outlined"
+            color="error"
+            sx={{ width: 1 / 2, marginRight: 2 }}
+          >
+            Làm lại
+          </Button>
+          <Button
+            className="px-4 py-2"
+            type="submit"
+            variant="contained"
+            color="success"
+            sx={{ width: 1 / 2, marginLeft: 2 }}
+          >
+            Giải
+          </Button>
+        </Stack>
       </form>
-    </div>
+    </Stack>
   );
 }
