@@ -3,22 +3,44 @@ const MAX_N = 10;
 
 export const transformInput = (
   text: string,
-  setTextValue: (value: string) => void
+  setTextValue: (value: string) => void,
+  isDigraph: boolean
 ): OptionalInputType => {
-  const validateInput = (n: number, input: Array<Array<number>>) => {
+  const isSymmetricMatrix = (arr: Array<Array<number>>, n: number): boolean => {
+    for (let i = 0; i < n; i++) {
+      for (let j = 0; j < n; j++) {
+        if (arr[i][j] !== arr[j][i]) {
+          return false;
+        }
+      }
+    }
+    return true;
+  };
+  const validateInput = (
+    n: number,
+    start: number,
+    input: Array<Array<number>>
+  ) => {
     if (n > MAX_N) throw new Error("Ma trận quá lớn");
     if (n < 1) throw new Error("Ma trận quá nhỏ");
-
+    if (typeof start !== "number" || start < 0 || start >= n)
+      throw new Error("Đỉnh bắt đầu không hợp lệ");
     for (const [index, line] of input.entries()) {
       if (line.length !== n)
         throw new Error(
-          `dòng thứ ${index + 1} dài: ${line.length}, mong đợi ${n}`
+          `Hàng thứ ${index + 1} của ma trận có ${
+            line.length
+          } đỉnh, thay vì ${n} đỉnh`
         );
 
       for (const item of line) {
         if (typeof item !== "number" || isNaN(item))
           throw new Error("Ma trận phải chứa số");
       }
+    }
+    if (!isDigraph) {
+      if (!isSymmetricMatrix(input, n))
+        throw new Error("Ma trận không đối xứng");
     }
   };
 
@@ -41,7 +63,8 @@ export const transformInput = (
   const start: number = arr[0][1];
 
   arr.shift();
-  validateInput(n, arr);
+  validateInput(n, start, arr);
+
   return { n, start, arr };
 };
 

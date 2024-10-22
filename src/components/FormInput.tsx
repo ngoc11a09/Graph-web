@@ -11,7 +11,10 @@ interface FormInputProps {
   isDigraph: boolean;
 }
 
-export default function FormInput({ setInputValue }: FormInputProps) {
+export default function FormInput({
+  setInputValue,
+  isDigraph,
+}: FormInputProps) {
   const [error, setError] = useState(" ");
   const [textValue, setTextValue] = useState("");
   const inputAreaId = useId();
@@ -30,7 +33,8 @@ export default function FormInput({ setInputValue }: FormInputProps) {
     try {
       const input: OptionalInputType = transformInput(
         formJson.data as string,
-        setTextValue
+        setTextValue,
+        isDigraph
       );
       setInputValue(input);
       setError(" ");

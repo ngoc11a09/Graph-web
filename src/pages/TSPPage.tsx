@@ -9,7 +9,7 @@ import Description from "../components/Description";
 const description = {
   title: "Bài toán người giao hàng (TSP)",
   description:
-    "Có một người giao hàng cần đi giao hàng tại n thành phố. Anh ta xuất phát từ một thành phố nào đó, đi qua các thành phố khác để giao hàng và trở về thành phố ban đầu. Mỗi thành phố chỉ đến một lần, và khoảng cách từ một thành phố đến các thành phố khác đã được biết trước.",
+    "Có một người giao hàng cần đi giao hàng tại n thành phố được đánh số từ 0 đến n-1. Anh ta xuất phát từ một thành phố nào đó, đi qua các thành phố khác để giao hàng và trở về thành phố ban đầu. Mỗi thành phố chỉ đến một lần, và khoảng cách từ một thành phố đến các thành phố khác đã được biết trước.",
   request:
     "Hãy tìm một chu trình (một đường đi khép kín thỏa mãn điều kiện trên) sao cho tổng độ dài/chi phí các cạnh là nhỏ nhất.",
   input1: "Dòng đầu tiên chứa số nguyên dương n (1≤n≤10) và đỉnh bắt đầu st.",
@@ -42,15 +42,15 @@ export default function TSPPage() {
   return (
     <Container>
       <Stack direction="row" spacing={2} useFlexGap alignItems="stretch">
-        <FormInput setInputValue={handleInputChange} isDigraph={false} />
         <Description description={description} />
+        <FormInput setInputValue={handleInputChange} isDigraph={false} />
       </Stack>
       {totalCost > 0 && (
         <Typography color="secondary" marginY={4} variant="h6">
           Tổng chi phí: {totalCost}
         </Typography>
       )}
-      {inputValue && (
+      {totalCost && (
         <Stack
           direction="row"
           sx={{

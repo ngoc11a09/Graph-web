@@ -4,7 +4,6 @@ import { InputType } from "../types/InputType";
 const graphColor: string = `#${import.meta.env.VITE_GRAPH_COLOR}`;
 
 const initialEdges = (inputValue: InputType, isDigraph: boolean): Edge[] => {
-  console.log("graphColor", graphColor);
   const edges: Edge[] = [];
   if (inputValue) {
     const dataArr: number[][] = inputValue?.arr;
@@ -59,7 +58,6 @@ export const generatePathTSP = (
       });
     }
   }
-  console.log("edges", edges);
 
   return edges;
 };
