@@ -2,7 +2,13 @@ import { useId, useState, ChangeEvent } from "react";
 import { transformInput } from "../utils/convertInput";
 import { OptionalInputType } from "../types/InputType";
 import TextField from "@mui/material/TextField";
-import { Button, FormHelperText, Stack } from "@mui/material";
+import {
+  Button,
+  FormControlLabel,
+  FormHelperText,
+  Stack,
+  Switch,
+} from "@mui/material";
 
 interface FormInputProps {
   inputValue?: OptionalInputType;
@@ -14,6 +20,7 @@ interface FormInputProps {
 export default function FormInput({
   setInputValue,
   isDigraph,
+  setIsDigraph,
 }: FormInputProps) {
   const [error, setError] = useState(" ");
   const [textValue, setTextValue] = useState("");
@@ -67,6 +74,16 @@ export default function FormInput({
         }}
         className="flex flex-col"
       >
+        {setIsDigraph && (
+          <FormControlLabel
+            control={<Switch defaultChecked color="secondary" />}
+            label={isDigraph ? "Đồ thị có hướng" : "Đồ thị vô hướng"}
+            onClick={() => {
+              setIsDigraph(!isDigraph);
+            }}
+            sx={{ alignSelf: "flex-end", marginRight: 0 }}
+          />
+        )}
         <TextField
           id={inputAreaId}
           label="Đầu vào"

@@ -14,7 +14,7 @@ const description = {
     "Hãy tìm một chu trình (một đường đi khép kín thỏa mãn điều kiện trên) sao cho tổng độ dài/chi phí các cạnh là nhỏ nhất.",
   input1: "Dòng đầu tiên chứa số nguyên dương n (1≤n≤10) và đỉnh bắt đầu st.",
   input2:
-    "n dòng tiếp theo, mỗi dòng chứa n số nguyên dương không vượt quá 100 biểu thị ma trận chi phí vô hướng C[n*n].",
+    "n dòng tiếp theo, mỗi dòng chứa n số nguyên dương không vượt quá 100 biểu thị ma trận chi phí vô hướng C[n*n].",
   output:
     "Tổng độ dài/chi phí của đường đi ngắn nhất thỏa mãn và đồ thị biểu diễn đường đi đó. ",
 };
@@ -22,7 +22,7 @@ const description = {
 export default function TSPPage() {
   const [inputValue, setInputValue] = useState<OptionalInputType>();
   const [outputValue, setOutputValue] = useState<Array<number>>();
-  const [totalCost, setTotalCost] = useState(0);
+  const [totalCost, setTotalCost] = useState(-1);
   const temp = useRef<number>(0);
 
   useEffect(() => {
@@ -45,12 +45,12 @@ export default function TSPPage() {
         <Description description={description} />
         <FormInput setInputValue={handleInputChange} isDigraph={false} />
       </Stack>
-      {totalCost > 0 && (
+      {totalCost >= 0 && (
         <Typography color="secondary" marginY={4} variant="h6">
           Tổng chi phí: {totalCost}
         </Typography>
       )}
-      {totalCost && (
+      {totalCost >= 0 && (
         <Stack
           direction="row"
           sx={{
