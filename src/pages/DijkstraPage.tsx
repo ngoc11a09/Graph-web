@@ -100,4 +100,10 @@ export default function DijkstraPage() {
 1 7 0 2 0
 0 5 2 0 7
 0 1 0 7 0 
+
+4 0
+  0 10 15 20
+  10 0 35 25
+  15 35 0 30
+  20 25 30 0
 */

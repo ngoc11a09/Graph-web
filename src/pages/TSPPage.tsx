@@ -5,6 +5,7 @@ import { OptionalInputType } from "../types/InputType";
 import { TSP } from "../algorithms/TSP";
 import { Box, Container, Stack, Typography } from "@mui/material";
 import Description from "../components/Description";
+import ArrowRightAltIcon from "@mui/icons-material/ArrowRightAlt";
 
 const description = {
   title: "Bài toán người giao hàng (TSP)",
@@ -21,14 +22,15 @@ const description = {
 
 export default function TSPPage() {
   const [inputValue, setInputValue] = useState<OptionalInputType>();
-  const [outputValue, setOutputValue] = useState<Array<number>>();
+  const [outputValue, setOutputValue] = useState<Array<number>>([]);
   const [totalCost, setTotalCost] = useState(-1);
   const temp = useRef<number>(0);
 
   useEffect(() => {
     if (inputValue) {
       const tsp = new TSP(inputValue.n, inputValue.start, inputValue.arr);
-      const res = tsp.solver();
+      const res = tsp.TSP();
+
       setOutputValue(res.path);
       setTotalCost(res.totalCost);
     }
@@ -46,9 +48,20 @@ export default function TSPPage() {
         <FormInput setInputValue={handleInputChange} isDigraph={false} />
       </Stack>
       {totalCost >= 0 && (
-        <Typography color="secondary" marginY={4} variant="h6">
-          Tổng chi phí: {totalCost}
-        </Typography>
+        <Stack direction="row" justifyContent="space-evenly">
+          <Typography color="secondary" marginY={4} variant="h6">
+            Tổng chi phí: {totalCost}
+          </Typography>
+          <Typography color="secondary" marginY={4} variant="h6">
+            Hành trình cần đi:{" "}
+            {outputValue.map((city, index) => (
+              <span key={index}>
+                {city}
+                {index < outputValue.length - 1 && <ArrowRightAltIcon />}
+              </span>
+            ))}
+          </Typography>
+        </Stack>
       )}
       {totalCost >= 0 && (
         <Stack
