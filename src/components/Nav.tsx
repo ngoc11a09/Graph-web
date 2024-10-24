@@ -1,10 +1,10 @@
-import * as React from "react";
 import { styled } from "@mui/material/styles";
 import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const primaryColor: string = `#${import.meta.env.VITE_PRIMARY_COLOR}`;
 
@@ -21,10 +21,10 @@ const CustomTabs = styled(Tabs)({
 
 export default function Nav() {
   const navigate = useNavigate();
-
-  const [value, setValue] = React.useState(0);
+  const [value, setValue] = useState(0);
 
   const handleChange = (event: React.SyntheticEvent, newValue: number) => {
+    setValue(newValue);
     switch (newValue) {
       case 0:
         navigate("/");
@@ -38,7 +38,6 @@ export default function Nav() {
       default:
         break;
     }
-    setValue(newValue);
   };
 
   return (
@@ -52,9 +51,9 @@ export default function Nav() {
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Home" {...a11yProps(0)} />
-          <Tab label="About" {...a11yProps(1)} />
-          <Tab label="More" {...a11yProps(2)} />
+          <Tab label="Trang chủ" {...a11yProps(0)} />
+          <Tab label="Khái niệm liên quan" {...a11yProps(1)} />
+          <Tab label="Xem thêm" {...a11yProps(2)} />
         </CustomTabs>
       </AppBar>
     </Box>

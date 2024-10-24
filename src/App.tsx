@@ -13,7 +13,7 @@ const App = () => (
     <Suspense fallback={<div>Loading...</div>}>
       <Routes>
         <Route path="/" element={<Layout />}>
-          <Route path="/" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="tsp" element={<TSPPage />} />
           <Route path="dijkstra" element={<DijkstraPage />} />
           <Route path="dfs" element={<DFSPage />} />
