@@ -3,14 +3,14 @@ import Graph from "../components/Graph";
 import { useEffect, useRef, useState } from "react";
 import { OptionalInputType } from "../types/InputType";
 import { DFS } from "../algorithms/DFS";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
+import Description from "../components/Description";
 
 const description = {
-  title: "Bài toán duyệt đồ thị (DFS)",
+  title: "Bài toán duyệt đồ thị theo chiều sâu (DFS)",
   description:
-    "Cho một đồ thị có hướng hoặc vô hướng, có trọng số và một đỉnh bắt đầu. Ta dùng các đỉnh của đồ thị để mô hình các thành phố và các cạnh để mô hình các đường nối giữa chúng. Khi đó trọng số các cạnh có thể xem như độ dài/chi phí của các con đường (do đó C[i][j] >= 0).",
-  request:
-    "Ta cần tính toán được đường đi ngắn nhất từ đỉnh nguồn st đến mỗi đỉnh của đồ thị.",
+    "Cho đơn đồ thị có hướng hoặc vô hướng, có trọng số  gồm n đỉnh và một đỉnh bắt đầu.",
+  request: "Hãy xây dựng cây DFS.",
   input1: "Dòng đầu tiên chứa số nguyên dương n (1≤n≤10) và đỉnh bắt đầu st.",
   input2:
     "n dòng tiếp theo, mỗi dòng chứa n số nguyên dương không vượt quá 100 biểu thị ma trận chi phí vô hướng (hoặc có hướng) C[n*n].",
@@ -29,6 +29,8 @@ export default function DFSPage() {
     if (inputValue) {
       const dfs = new DFS(inputValue.n, inputValue.start, inputValue.arr);
       const res = dfs.solve();
+      console.log(res);
+
       setOutputValue(res.path);
     }
   }, [inputValue]);
@@ -40,13 +42,34 @@ export default function DFSPage() {
 
   return (
     <Container>
-      <FormInput
-        setInputValue={handleInputChange}
-        setIsDigraph={setIsDigraph}
-        isDigraph={isDigraph}
-      />
-      {inputValue && (
-        <div className="input-graph" key={temp.current}>
+      <Stack direction="row" spacing={2} useFlexGap alignItems="stretch">
+        <Description description={description} />
+        <FormInput
+          setInputValue={handleInputChange}
+          setIsDigraph={setIsDigraph}
+          isDigraph={isDigraph}
+        />
+      </Stack>
+      {outputValue && (
+        <Stack
+          direction="row"
+          sx={{
+            height: 400,
+            border: 2,
+            borderStyle: "dashed",
+            borderColor: "secondary.main",
+          }}
+          key={temp.current}
+          divider={
+            <Box
+              sx={{
+                border: 1,
+                borderStyle: "solid",
+                borderColor: "secondary.main",
+              }}
+            ></Box>
+          }
+        >
           <Graph inputValue={inputValue} isDigraph={isDigraph} />
           <Graph
             inputValue={inputValue}
@@ -54,7 +77,7 @@ export default function DFSPage() {
             isDigraph={isDigraph}
             algo="DFS"
           />
-        </div>
+        </Stack>
       )}
     </Container>
   );

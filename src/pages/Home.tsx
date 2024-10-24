@@ -17,9 +17,9 @@ const Dijkstra = {
   path: "dijkstra",
 };
 const Dfs = {
-  title: "Bài toán duyệt đồ thị",
+  title: "Bài toán duyệt đồ thị theo chiều sâu",
   description:
-    "Cho đơn đồ thị có hướng hoặc vô hướng, có trọng số  gồm n đỉnh và một đỉnh bắt đầu. Hãy xác định xem đồ thị có bao nhiêu thành phần liên thông?",
+    "Cho đơn đồ thị có hướng hoặc vô hướng, có trọng số  gồm n đỉnh và một đỉnh bắt đầu. Hãy xây dựng cây DFS.",
   path: "dfs",
 };
 

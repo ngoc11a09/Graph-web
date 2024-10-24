@@ -35,14 +35,15 @@ export class DFS {
       }
       this.tail[u] = this.cnt;
     }
-    // console.log("par", this.par);
-    // console.log("num", this.num);
-    // console.log("tail", this.tail);
-
     return { path: this.par };
   };
 
   solve = () => {
+    console.log("par", this.par);
+    console.log("num", this.num);
+    console.log("low", this.low);
+    console.log("tail", this.tail);
+
     return this.dfs(this.start, -1);
   };
 }
