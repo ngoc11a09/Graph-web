@@ -15,7 +15,7 @@ export class DFS {
     this.start = start;
     this.arr = arr;
     this.low = Array(this.n).fill(0);
-    this.num = Array(this.n).fill(0); //visit
+    this.num = Array(this.n).fill(0);
     this.tail = Array(this.n).fill(-1);
     this.par = Array(this.n).fill(-1);
     this.cnt = 0;
@@ -35,15 +35,28 @@ export class DFS {
       }
       this.tail[u] = this.cnt;
     }
-    return { path: this.par };
+    return { path: this.par, num: this.num };
   };
 
   solve = () => {
-    console.log("par", this.par);
-    console.log("num", this.num);
-    console.log("low", this.low);
-    console.log("tail", this.tail);
+    // console.log("par", this.par);
+    // console.log("num", this.num);
+    // console.log("low", this.low);
+    // console.log("tail", this.tail);
+    console.log(this.arr);
 
     return this.dfs(this.start, -1);
   };
 }
+/*
+9 0
+0 1 0 0 0 1 0 1 0
+0 0 1 0 0 0 0 0 0 
+0 0 0 1 1 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 1 0 0 
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+0 0 0 0 0 0 0 0 0
+*/

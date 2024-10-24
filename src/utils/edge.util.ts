@@ -97,7 +97,7 @@ export function createNodesAndEdges(
   const nodes = initialNodes(inputValue, isRes);
   let edges: Edge[] = [];
   if (isRes) {
-    if (outputValue) {
+    if (outputValue && algo) {
       if (algo === AlgorithmsEnum.TSP) {
         edges = generatePathTSP(outputValue, inputValue as InputType);
       } else if (algo === AlgorithmsEnum.Dijkstra) {

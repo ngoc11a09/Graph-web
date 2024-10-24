@@ -7,14 +7,15 @@ const initialEdges = (inputValue: InputType, isDigraph: boolean): Edge[] => {
   const edges: Edge[] = [];
   if (inputValue) {
     const dataArr: number[][] = inputValue?.arr;
+
     for (let i = 0; i < inputValue.n; i++) {
       for (let j = 0; j < inputValue.n; j++) {
-        if (dataArr?.[i][j] !== 0 && i != j) {
+        if (dataArr?.[i]?.[j] && i != j) {
           const edge: Edge = {
             id: `${i}${j}`,
             source: `${i}`,
             target: `${j}`,
-            data: { label: `${dataArr?.[i][j]}` },
+            data: { label: `${dataArr?.[i]?.[j]}` },
             type: "floating",
           };
           if (isDigraph) {

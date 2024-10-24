@@ -21,6 +21,8 @@ export const transformInput = (
     start: number,
     input: Array<Array<number>>
   ) => {
+    if (input.length !== n) throw new Error("Số hàng không khớp với số đỉnh");
+
     if (n > MAX_N) throw new Error("Ma trận quá lớn");
     if (n < 1) throw new Error("Ma trận quá nhỏ");
     if (typeof start !== "number" || start < 0 || start >= n)
