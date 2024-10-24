@@ -7,6 +7,7 @@ import DFSPage from "./pages/DFSPage";
 import Layout from "./pages/Layout";
 import About from "./pages/About";
 import More from "./pages/More";
+import MSTPage from "./pages/MSTPage";
 
 const App = () => (
   <Router>
@@ -17,6 +18,7 @@ const App = () => (
           <Route path="tsp" element={<TSPPage />} />
           <Route path="dijkstra" element={<DijkstraPage />} />
           <Route path="dfs" element={<DFSPage />} />
+          <Route path="mst" element={<MSTPage />} />
           <Route path="about" element={<About />} />
           <Route path="more" element={<More />} />
 

@@ -9,12 +9,13 @@ export enum AlgorithmsEnum {
   TSP = "TSP",
   Dijkstra = "Dijkstra",
   DFS = "DFS",
+  MST = "MST",
 }
 
-export type Algorithms = "TSP" | "Dijkstra" | "DFS";
+export type Algorithms = "TSP" | "Dijkstra" | "DFS" | "MST";
 interface GraphProps {
   inputValue?: InputType;
-  outputValue?: Array<number>;
+  outputValue?: Array<number> | number[][];
   algo?: Algorithms;
   isDigraph?: boolean;
 }

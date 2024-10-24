@@ -145,5 +145,34 @@ export const generatePathDFS = (
   return edges;
 };
 
+export const generatePathMST = (
+  outputValue: number[][],
+  inputValue: InputType
+): Edge[] => {
+  const edges: Edge[] = [];
+
+  if (outputValue) {
+    const dataArr: number[][] = inputValue.arr;
+
+    for (let i = 0; i < outputValue.length; i++) {
+      edges.push({
+        id: `${outputValue[i][0]}${outputValue[i][1]}`,
+        source: `${outputValue[i][0]}`,
+        target: `${outputValue[i][1]}`,
+        data: {
+          label: `${dataArr?.[outputValue?.[i][0]]?.[outputValue?.[i][1]]}`,
+        },
+        type: "floating",
+        style: {
+          strokeWidth: 2,
+          stroke: graphColor,
+        },
+      });
+    }
+  }
+
+  return edges;
+};
+
 export default initialEdges;
 export const edgeTypes = {} satisfies EdgeTypes;

@@ -3,6 +3,7 @@ import ContentCard from "../components/ContentCard";
 import shipperImage from "../assets/images/shipper.jpg";
 import mapImage from "../assets/images/map.jpg";
 import dfs from "../assets/images/dfs.jpeg";
+import MinSpanningTree from "../assets/images/MinSpanningTree.jpg";
 import CustomizedSteppers from "../components/Steps";
 
 const TSP = {
@@ -22,6 +23,12 @@ const Dfs = {
   description:
     "Cho đơn đồ thị có hướng hoặc vô hướng, có trọng số  gồm n đỉnh và một đỉnh bắt đầu. Hãy xây dựng cây DFS.",
   path: "dfs",
+};
+const MST = {
+  title: "Bài toán xây dựng đường giao thông",
+  description:
+    "Giả sử ta muốn xây dựng một hệ thống đường nối n thành phố sao cho giữa các thành phố bất kì luôn có đường đi. Bài toán đặt ra là tìm tổng chi phí xây dựng đường đi là nhỏ nhất.",
+  path: "mst",
 };
 
 const Home = () => {
@@ -58,6 +65,13 @@ const Home = () => {
           img={dfs}
           path={Dfs.path}
           index={2}
+        />
+        <ContentCard
+          title={MST.title}
+          description={MST.description}
+          img={MinSpanningTree}
+          path={MST.path}
+          index={3}
         />
       </Stack>
     </Container>

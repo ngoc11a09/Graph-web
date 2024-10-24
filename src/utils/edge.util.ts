@@ -3,6 +3,7 @@ import initialNodes from "../nodes";
 import initialEdges, {
   generatePathDFS,
   generatePathDijkstra,
+  generatePathMST,
   generatePathTSP,
 } from "../edges";
 import { InputType } from "../types/InputType";
@@ -112,6 +113,8 @@ export function createNodesAndEdges(
           inputValue as InputType,
           isDigraph as boolean
         );
+      } else if (algo === AlgorithmsEnum.MST) {
+        edges = generatePathMST(outputValue, inputValue as InputType);
       }
     }
   } else edges = initialEdges(inputValue, isDigraph);
