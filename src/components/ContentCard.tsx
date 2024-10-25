@@ -4,12 +4,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import CardActionArea from "@mui/material/CardActionArea";
 import { Container } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { usePath } from "../PathContext";
 
 interface ContentCardProps {
   title: string;
   description: string;
-  path: string;
+  url: string;
   img: string;
   index: number;
 }
@@ -17,14 +17,14 @@ interface ContentCardProps {
 const ContentCard: React.FC<ContentCardProps> = ({
   title,
   description,
-  path,
+  url,
   img,
   index,
 }) => {
-  const navigate = useNavigate();
+  const { setPath } = usePath();
 
   const handleClick = () => {
-    navigate(path);
+    setPath(index);
   };
   return (
     <Card className="w-full h-32 " sx={{ bgcolor: "grey.A200" }}>
@@ -39,7 +39,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           <CardMedia
             component="img"
             image={img}
-            alt={path}
+            alt={url}
             sx={{ height: "128px", width: "25%" }}
           />
         )}
@@ -61,7 +61,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
           <CardMedia
             component="img"
             image={img}
-            alt={path}
+            alt={url}
             sx={{ width: "25%" }}
           />
         )}

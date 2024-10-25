@@ -3,7 +3,7 @@ import AppBar from "@mui/material/AppBar";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
 import Box from "@mui/material/Box";
-import { useNavigate } from "react-router-dom";
+import { usePath } from "../PathContext";
 import { useState } from "react";
 
 const primaryColor: string = `#${import.meta.env.VITE_PRIMARY_COLOR}`;
@@ -20,40 +20,38 @@ const CustomTabs = styled(Tabs)({
 });
 
 export default function Nav() {
-  const navigate = useNavigate();
+  const { setPath } = usePath();
   const [value, setValue] = useState(0);
 
-  const handleChange = (event: React.SyntheticEvent, newValue: number) => {
-    setValue(newValue);
-    switch (newValue) {
-      case 0:
-        navigate("/");
-        break;
-      case 1:
-        navigate("/about");
-        break;
-      case 2:
-        navigate("/more");
-        break;
-      default:
-        break;
-    }
+  const handleClick = (value: number) => {
+    setPath(value);
+    setValue(value);
   };
-
   return (
     <Box>
       <AppBar position="static">
         <CustomTabs
           value={value}
-          onChange={handleChange}
           indicatorColor="secondary"
           textColor="inherit"
           variant="fullWidth"
           aria-label="full width tabs example"
         >
-          <Tab label="Trang chủ" {...a11yProps(0)} />
-          <Tab label="Khái niệm liên quan" {...a11yProps(1)} />
-          <Tab label="Xem thêm" {...a11yProps(2)} />
+          <Tab
+            label="Bài toán"
+            {...a11yProps(0)}
+            onClick={() => handleClick(0)}
+          />
+          <Tab
+            label="Giải thuật"
+            {...a11yProps(1)}
+            onClick={() => handleClick(1)}
+          />
+          <Tab
+            label="Xem thêm"
+            {...a11yProps(2)}
+            onClick={() => handleClick(2)}
+          />
         </CustomTabs>
       </AppBar>
     </Box>

@@ -8,6 +8,10 @@ import Layout from "./pages/Layout";
 import About from "./pages/About";
 import More from "./pages/More";
 import MSTPage from "./pages/MSTPage";
+import BranchAndBound from "./pages/about_algorithms/BranchAndBound";
+import Dfs from "./pages/about_algorithms/Dfs";
+import Dijkstra from "./pages/about_algorithms/Dijkstra";
+import Kruskal from "./pages/about_algorithms/Kruskal";
 
 const App = () => (
   <Router>
@@ -20,6 +24,10 @@ const App = () => (
           <Route path="dfs" element={<DFSPage />} />
           <Route path="mst" element={<MSTPage />} />
           <Route path="about" element={<About />} />
+          <Route path="about/bab" element={<BranchAndBound />}></Route>
+          <Route path="about/dijkstra" element={<Dijkstra />}></Route>
+          <Route path="about/dfs" element={<Dfs />}></Route>
+          <Route path="about/kruskal" element={<Kruskal />}></Route>
           <Route path="more" element={<More />} />
 
           <Route path="*" element={<div>404</div>} />

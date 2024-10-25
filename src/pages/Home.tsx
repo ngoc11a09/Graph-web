@@ -10,25 +10,25 @@ const TSP = {
   title: "Bài toán người giao hàng",
   description:
     "Một người giao hàng xuất phát từ thành phố cho trước, người này muốn đi tới tất cả các thành phố khác, mỗi thành phố đúng một lần rồi quay trở lại thành phố ban đầu.",
-  path: "tsp",
+  url: "tsp",
 };
 const Dijkstra = {
   title: "Bài toán tìm đường đi ngắn nhất",
   description:
     "Cho một đồ thị có hướng hoặc vô hướng, có trọng số và một đỉnh bắt đầu. Cần tính toán đường đi ngắn nhất từ đỉnh bắt đầu đến mỗi đỉnh của đồ thị.",
-  path: "dijkstra",
+  url: "dijkstra",
 };
 const Dfs = {
   title: "Bài toán duyệt đồ thị theo chiều sâu",
   description:
     "Cho đơn đồ thị có hướng hoặc vô hướng, có trọng số  gồm n đỉnh và một đỉnh bắt đầu. Hãy xây dựng cây DFS.",
-  path: "dfs",
+  url: "dfs",
 };
 const MST = {
   title: "Bài toán xây dựng đường giao thông",
   description:
     "Giả sử ta muốn xây dựng một hệ thống đường nối n thành phố sao cho giữa các thành phố bất kì luôn có đường đi. Bài toán đặt ra là tìm tổng chi phí xây dựng đường đi là nhỏ nhất.",
-  path: "mst",
+  url: "mst",
 };
 
 const Home = () => {
@@ -49,29 +49,29 @@ const Home = () => {
           title={TSP.title}
           description={TSP.description}
           img={shipperImage}
-          path={TSP.path}
-          index={0}
+          url={TSP.url}
+          index={10}
         />
         <ContentCard
           title={Dijkstra.title}
           description={Dijkstra.description}
           img={mapImage}
-          path={Dijkstra.path}
-          index={1}
+          url={Dijkstra.url}
+          index={11}
         />
         <ContentCard
           title={Dfs.title}
           description={Dfs.description}
           img={dfs}
-          path={Dfs.path}
-          index={2}
+          url={Dfs.url}
+          index={12}
         />
         <ContentCard
           title={MST.title}
           description={MST.description}
           img={MinSpanningTree}
-          path={MST.path}
-          index={3}
+          url={MST.url}
+          index={13}
         />
       </Stack>
     </Container>
