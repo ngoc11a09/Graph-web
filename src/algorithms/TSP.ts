@@ -20,14 +20,20 @@ export class TSP {
       this.final_path[i] = curr_path[i];
     }
     this.final_path[this.n] = curr_path[0];
+    console.log("update final path", this.final_path);
   }
 
   firstMin(i: number) {
     let min = Number.MAX_SAFE_INTEGER;
     for (let k = 0; k < this.n; k++) {
-      if (this.arr[i][k] < min && i !== k) {
+      if (this.arr[i][k] < min && i !== k && this.arr[i][k] !== 0) {
         min = this.arr[i][k];
       }
+    }
+    if (min === Number.MAX_SAFE_INTEGER) {
+      throw new Error(
+        "Có ít nhất 1 đỉnh không liên thông. Hãy nhập lại đầu vào cho đồ thị."
+      );
     }
     return min;
   }
@@ -36,7 +42,7 @@ export class TSP {
     let first = Number.MAX_SAFE_INTEGER;
     let second = Number.MAX_SAFE_INTEGER;
     for (let j = 0; j < this.n; j++) {
-      if (i == j) {
+      if (i === j || this.arr[i][j] === 0) {
         continue;
       }
       if (this.arr[i][j] <= first) {
@@ -45,6 +51,9 @@ export class TSP {
       } else if (this.arr[i][j] <= second && this.arr[i][j] !== first) {
         second = this.arr[i][j];
       }
+    }
+    if (second === Number.MAX_SAFE_INTEGER) {
+      throw new Error("Có ít nhất 1 đỉnh không liên thông");
     }
     return second;
   }
@@ -55,19 +64,10 @@ export class TSP {
     level: number,
     curr_path: number[]
   ) {
-    // base case is when we have reached level N which
-    // means we have covered all the nodes once
     if (level == this.n) {
-      // check if there is an edge from last vertex in
-      // path back to the first vertex
-      if (this.arr[curr_path[level - 1]][curr_path[0]] !== 0) {
-        // curr_res has the total weight of the
-        // solution we got
+      if (this.arr[curr_path[level - 1]][curr_path[0]] !== this.start) {
         const curr_res =
           curr_weight + this.arr[curr_path[level - 1]][curr_path[0]];
-
-        // Update final result and final path if
-        // current result is better.
         if (curr_res < this.final_res) {
           this.copyToFinal(curr_path);
           this.final_res = curr_res;
@@ -76,8 +76,6 @@ export class TSP {
       return;
     }
 
-    // for any other level iterate for all vertices to
-    // build the search space tree recursively
     for (let i = 0; i < this.n; i++) {
       // Consider next vertex if it is not same (diagonal
       // entry in arracency matrix and not visited
@@ -134,14 +132,9 @@ export class TSP {
     // Rounding off the lower bound to an integer
     curr_bound = curr_bound == 1 ? curr_bound / 2 + 1 : curr_bound / 2;
 
-    // We start at vertex 1 so the first vertex
-    // in curr_path[] is 0
     this.isVisited[this.start] = true;
-
     curr_path[0] = this.start;
 
-    // Call to TSPRec for curr_weight equal to
-    // 0 and level 1
     this.TSPRec(curr_bound, 0, 1, curr_path);
     return { totalCost: this.final_res, path: this.final_path };
   }

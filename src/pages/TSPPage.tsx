@@ -24,15 +24,25 @@ export default function TSPPage() {
   const [inputValue, setInputValue] = useState<OptionalInputType>();
   const [outputValue, setOutputValue] = useState<Array<number>>([]);
   const [totalCost, setTotalCost] = useState(-1);
+  const [error, setError] = useState("");
   const temp = useRef<number>(0);
 
   useEffect(() => {
     if (inputValue) {
-      const tsp = new TSP(inputValue.n, inputValue.start, inputValue.arr);
-      const res = tsp.TSP();
+      try {
+        const tsp = new TSP(inputValue.n, inputValue.start, inputValue.arr);
+        const res = tsp.TSP();
 
-      setOutputValue(res.path);
-      setTotalCost(res.totalCost);
+        setOutputValue(res.path);
+        setTotalCost(res.totalCost);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        } else {
+          setError("An unknown error occurred");
+        }
+        setTotalCost(-1);
+      }
     }
   }, [inputValue]);
 
@@ -47,6 +57,22 @@ export default function TSPPage() {
         <Description description={description} />
         <FormInput setInputValue={handleInputChange} isDigraph={false} />
       </Stack>
+      {error && (
+        <Typography
+          color="error"
+          marginY={4}
+          variant="h6"
+          textAlign="center"
+          sx={{
+            py: 16,
+            border: 2,
+            borderStyle: "dashed",
+            borderColor: "error.main",
+          }}
+        >
+          {error}
+        </Typography>
+      )}
       {totalCost >= 0 && (
         <Stack direction="row" justifyContent="space-evenly">
           <Typography color="secondary" marginY={4} variant="h6">
