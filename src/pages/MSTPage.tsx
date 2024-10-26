@@ -12,7 +12,7 @@ const description = {
     "Giả sử ta muốn xây dựng một hệ thống đường nối n thành phố (được đánh số từ 0 đến n-1) sao cho giữa các thành phố bất kì luôn có đường đi.",
   request:
     "Hãy tìm cây khung nhỏ nhất trên đồ thị, mỗi thành phố ứng với một đỉnh sao cho tổng chi phí xây dựng đường đi là nhỏ nhất.",
-  input1: "Dòng đầu tiên chứa số nguyên dương n (1≤n≤10) và đỉnh bắt đầu st.",
+  input1: "Dòng đầu tiên chứa số nguyên dương n (1≤n≤10).",
   input2:
     "n dòng tiếp theo, mỗi dòng chứa n số nguyên dương không vượt quá 100 biểu thị ma trận chi phí vô hướng C[n*n].",
   output:
@@ -46,7 +46,11 @@ export default function MSTPage() {
     <Container>
       <Stack direction="row" spacing={2} useFlexGap alignItems="stretch">
         <Description description={description} />
-        <FormInput setInputValue={handleInputChange} isDigraph={false} />
+        <FormInput
+          setInputValue={handleInputChange}
+          isDigraph={false}
+          noStartNode={true}
+        />
       </Stack>
       {totalCost >= 0 && (
         <Typography color="secondary" marginY={4} variant="h6">

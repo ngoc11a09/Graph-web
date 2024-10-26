@@ -20,7 +20,6 @@ export class TSP {
       this.final_path[i] = curr_path[i];
     }
     this.final_path[this.n] = curr_path[0];
-    console.log("update final path", this.final_path);
   }
 
   firstMin(i: number) {

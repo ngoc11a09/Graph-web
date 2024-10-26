@@ -15,12 +15,14 @@ interface FormInputProps {
   setInputValue: (value: OptionalInputType) => void;
   setIsDigraph?: (value: boolean) => void;
   isDigraph: boolean;
+  noStartNode?: boolean;
 }
 
 export default function FormInput({
   setInputValue,
   isDigraph,
   setIsDigraph,
+  noStartNode,
 }: FormInputProps) {
   const [error, setError] = useState(" ");
   const [textValue, setTextValue] = useState("");
@@ -41,7 +43,8 @@ export default function FormInput({
       const input: OptionalInputType = transformInput(
         formJson.data as string,
         setTextValue,
-        isDigraph
+        isDigraph,
+        !noStartNode
       );
       setInputValue(input);
       setError(" ");
@@ -94,8 +97,7 @@ export default function FormInput({
           focused
           value={textValue}
           onChange={onChangeInput}
-          placeholder="VD:
-4 0
+          placeholder="4 0
 0 10 15 20
 10 0 35 25
 15 35 0 30

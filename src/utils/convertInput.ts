@@ -4,7 +4,8 @@ const MAX_N = 10;
 export const transformInput = (
   text: string,
   setTextValue: (value: string) => void,
-  isDigraph: boolean
+  isDigraph: boolean,
+  startNode: boolean
 ): OptionalInputType => {
   const isSymmetricMatrix = (arr: Array<Array<number>>, n: number): boolean => {
     for (let i = 0; i < n; i++) {
@@ -25,8 +26,15 @@ export const transformInput = (
 
     if (n > MAX_N) throw new Error("Ma trận quá lớn");
     if (n < 1) throw new Error("Ma trận quá nhỏ");
-    if (typeof start !== "number" || start < 0 || start >= n)
-      throw new Error("Đỉnh bắt đầu không hợp lệ");
+
+    if (startNode) {
+      if (typeof start !== "number" || start < 0 || start >= n)
+        throw new Error("Đỉnh bắt đầu không hợp lệ");
+    } else {
+      if (start || start == 0)
+        throw new Error("Dòng đầu tiên chỉ chứa số đỉnh của đồ thị");
+      start = 0;
+    }
     for (const [index, line] of input.entries()) {
       if (line.length !== n)
         throw new Error(
