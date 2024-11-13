@@ -64,7 +64,7 @@ export class TSP {
     curr_path: number[]
   ) {
     if (level == this.n) {
-      if (this.arr[curr_path[level - 1]][curr_path[0]] !== this.start) {
+      if (this.arr[curr_path[level - 1]][curr_path[0]] !== 0) {
         const curr_res =
           curr_weight + this.arr[curr_path[level - 1]][curr_path[0]];
         if (curr_res < this.final_res) {

@@ -32,6 +32,7 @@ const ContentCard: React.FC<ContentCardProps> = ({
         sx={{
           display: "flex",
           flexDirection: "row",
+          height: "100%",
         }}
         onClick={handleClick}
       >
@@ -43,8 +44,8 @@ const ContentCard: React.FC<ContentCardProps> = ({
             sx={{ height: "128px", width: "25%" }}
           />
         )}
-        <Container>
-          <CardContent>
+        <Container sx={{ height: "100%" }}>
+          <CardContent sx={{ height: "100%" }}>
             <Typography gutterBottom variant="h5" component="div">
               {title}
             </Typography>
