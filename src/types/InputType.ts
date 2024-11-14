@@ -5,3 +5,4 @@ export interface InputType {
 }
 
 export type OptionalInputType = InputType | undefined;
+export type MatrixType = number[][];

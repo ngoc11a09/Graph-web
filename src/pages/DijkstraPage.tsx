@@ -3,7 +3,7 @@ import Graph from "../components/Graph";
 import { useEffect, useRef, useState } from "react";
 import { OptionalInputType } from "../types/InputType";
 import { Dijkstra } from "../algorithms/Dijkstra";
-import { Box, Container, Stack, Typography } from "@mui/material";
+import { Box, Container, Stack } from "@mui/material";
 import Description from "../components/Description";
 
 const description = {
@@ -55,11 +55,6 @@ export default function DijkstraPage() {
           isDigraph={isDigraph}
         />
       </Stack>
-      {totalCost >= 0 && (
-        <Typography color="secondary" marginY={4} variant="h6">
-          Tổng chi phí: {totalCost}
-        </Typography>
-      )}
       {totalCost >= 0 && (
         <Stack
           direction="row"

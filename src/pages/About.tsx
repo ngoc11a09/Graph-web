@@ -32,7 +32,7 @@ const description = [
     img: mapImage,
     pathIdx: 21,
     description:
-      "Thuật toán Dijkstra giúp tìm đường đi ngắn nhất từ một đỉnh bắt đầu đến tất cả các đỉnh còn lại trong đồ thị có hướng hoặc vô hướng, có trọng số. Đây là một thuật toán quan trọng và được sử dụng rộng rãi trong lĩnh vực khoa học máy tính.",
+      "Thuật toán Dijkstra giúp tìm đường đi ngắn nhất từ một đỉnh bắt đầu đến tất cả các đỉnh còn lại trong đồ thị có hướng hoặc vô hướng, có trọng số. Đây là một thuật toán quan trọng và được sử dụng rộng rãi.",
   },
   {
     title: "Bài toán duyệt đồ thị theo chiều sâu",
