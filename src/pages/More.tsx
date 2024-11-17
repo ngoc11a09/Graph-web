@@ -47,6 +47,7 @@ const More = () => {
   const temp = useRef<number>(0);
   const [isDigraph, setIsDigraph] = useState<boolean>(false);
   const sortedPathArray = useRef<{ key: number; value: number }[]>([]);
+  const [showGraph, setShowGraph] = useState(false);
 
   useEffect(() => {
     if (inputValue) {
@@ -86,11 +87,12 @@ const More = () => {
           setOutputValueMST(res.path);
           setTotalCost(res.totalCost);
         }
+        setShowGraph(true);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
         } else {
-          setError("An unknown error occurred");
+          setError("Lỗi! Vui lòng nhập lại");
         }
         setTotalCost(-1);
       }
@@ -101,10 +103,13 @@ const More = () => {
     setValue(newValue);
     setOutputValue([]);
     setTotalCost(-1);
+    setShowGraph(false);
   };
 
   const handleInputChange = (value: OptionalInputType) => {
     setInputValue(value);
+    setShowGraph(false);
+    setError("");
     temp.current++;
   };
 
@@ -184,56 +189,57 @@ const More = () => {
                   {error}
                 </Typography>
               )}
-              {totalCost >= 0 && (
-                <Stack direction="row" justifyContent="space-evenly">
-                  <Typography color="secondary" marginY={4} variant="h6">
-                    Tổng chi phí: {totalCost}
-                  </Typography>
-                  <Typography color="secondary" marginY={4} variant="h6">
-                    Hành trình cần đi:{" "}
-                    {outputValue.map((city, index) => (
-                      <span key={index}>
-                        {city}
-                        {index < outputValue.length - 1 && (
-                          <ArrowRightAltIcon />
-                        )}
-                      </span>
-                    ))}
-                  </Typography>
-                </Stack>
-              )}
-              {totalCost >= 0 && (
-                <Stack
-                  direction="row"
-                  sx={{
-                    height: 400,
-                    border: 2,
-                    borderStyle: "dashed",
-                    borderColor: "secondary.main",
-                  }}
-                  key={temp.current}
-                  divider={
-                    <Box
-                      sx={{
-                        border: 1,
-                        borderStyle: "solid",
-                        borderColor: "secondary.main",
-                      }}
-                    ></Box>
-                  }
-                >
-                  <Graph inputValue={inputValue} isDigraph={false} />
-                  <Graph
-                    inputValue={inputValue}
-                    outputValue={outputValue}
-                    algo="TSP"
-                    isDigraph={false}
-                  />
-                </Stack>
+              {showGraph && (
+                <>
+                  <Stack direction="row" justifyContent="space-evenly">
+                    <Typography color="secondary" marginY={4} variant="h6">
+                      Tổng chi phí: {totalCost}
+                    </Typography>
+                    <Typography color="secondary" marginY={4} variant="h6">
+                      Hành trình cần đi:{" "}
+                      {outputValue.map((city, index) => (
+                        <span key={index}>
+                          {city}
+                          {index < outputValue.length - 1 && (
+                            <ArrowRightAltIcon />
+                          )}
+                        </span>
+                      ))}
+                    </Typography>
+                  </Stack>
+
+                  <Stack
+                    direction="row"
+                    sx={{
+                      height: 400,
+                      border: 2,
+                      borderStyle: "dashed",
+                      borderColor: "secondary.main",
+                    }}
+                    key={temp.current}
+                    divider={
+                      <Box
+                        sx={{
+                          border: 1,
+                          borderStyle: "solid",
+                          borderColor: "secondary.main",
+                        }}
+                      ></Box>
+                    }
+                  >
+                    <Graph inputValue={inputValue} isDigraph={false} />
+                    <Graph
+                      inputValue={inputValue}
+                      outputValue={outputValue}
+                      algo="TSP"
+                      isDigraph={false}
+                    />
+                  </Stack>
+                </>
               )}
             </TabPanel>
             <TabPanel value={value} index={1}>
-              {totalCost >= 0 && (
+              {showGraph && (
                 <Stack
                   direction="row"
                   sx={{
@@ -264,7 +270,7 @@ const More = () => {
               )}
             </TabPanel>
             <TabPanel value={value} index={2}>
-              {outputValue && (
+              {showGraph && (
                 <Stack>
                   <Typography color="secondary" marginY={4} variant="h6">
                     Thứ tự duyệt DFS là:{" "}
@@ -308,12 +314,12 @@ const More = () => {
               )}
             </TabPanel>
             <TabPanel value={value} index={3}>
-              {totalCost >= 0 && (
+              {showGraph && (
                 <Typography color="secondary" marginY={4} variant="h6">
                   Tổng chi phí: {totalCost}
                 </Typography>
               )}
-              {totalCost >= 0 && (
+              {showGraph && (
                 <Stack
                   direction="row"
                   sx={{

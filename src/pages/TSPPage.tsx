@@ -39,7 +39,7 @@ export default function TSPPage() {
         if (error instanceof Error) {
           setError(error.message);
         } else {
-          setError("An unknown error occurred");
+          setError("Lỗi! Vui lòng nhập lại");
         }
         setTotalCost(-1);
       }
@@ -48,6 +48,7 @@ export default function TSPPage() {
 
   const handleInputChange = (value: OptionalInputType) => {
     setInputValue(value);
+    setError("");
     temp.current++;
   };
 

@@ -75,6 +75,20 @@ export default function MatrixInput({
       );
   }
 
+  const handleFileUpload = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      try {
+        const text = await file.text(); // Read the file content
+        setTextValue(text); // Set the content to the TextField
+      } catch (error) {
+        setError("Không thể đọc tệp này");
+      }
+    }
+  };
+
   return (
     <Stack>
       <form
@@ -149,13 +163,21 @@ export default function MatrixInput({
           focused
           value={textValue}
           onChange={onChangeInput}
-          placeholder="4 0
-0 10 15 20
+          placeholder="0 10 15 20
 10 0 35 25
 15 35 0 30
 20 25 30 0"
         />
         <HelperText />
+        <Button
+          variant="contained"
+          color="secondary"
+          component="label"
+          sx={{ mt: 2 }}
+        >
+          Tải tệp lên
+          <input type="file" hidden accept=".txt" onChange={handleFileUpload} />
+        </Button>
         <Stack direction="row" spacing={2} sx={{ my: 2 }}>
           <Button
             className="px-4 py-2"

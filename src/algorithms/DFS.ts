@@ -43,7 +43,7 @@ export class DFS {
     // console.log("num", this.num);
     // console.log("low", this.low);
     // console.log("tail", this.tail);
-    console.log(this.arr);
+    // console.log(this.arr);
 
     return this.dfs(this.start, -1);
   };
