@@ -3,6 +3,7 @@ import FloatingEdge from "../edges/FloatingEdge";
 import FloatingConnectionLine from "../edges/FloatingConnectionLine";
 import { createNodesAndEdges } from "../utils/edge.util";
 import { InputType } from "../types/InputType";
+import { useEffect } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export enum AlgorithmsEnum {
@@ -38,8 +39,22 @@ const Graph: React.FC<GraphProps> = ({
   const edgeTypes = {
     floating: FloatingEdge,
   };
-  const [nodes, , onNodesChange] = useNodesState(initialNodes);
-  const [edges, , onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+
+  useEffect(() => {
+    const { nodes: newNodes, edges: newEdges } = createNodesAndEdges(
+      inputValue as InputType,
+      isRes,
+      isDigraph as boolean,
+      outputValue as Array<number>,
+      algo as Algorithms
+    );
+
+    setNodes(newNodes);
+    setEdges(newEdges);
+  }, [inputValue, outputValue, isDigraph]);
+
   return (
     <ReactFlow
       className="h-full floatingedges"

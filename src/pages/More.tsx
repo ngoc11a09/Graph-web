@@ -99,6 +99,8 @@ const More = () => {
 
   const handleChange = (_: React.SyntheticEvent, newValue: number) => {
     setValue(newValue);
+    setOutputValue([]);
+    setTotalCost(-1);
   };
 
   const handleInputChange = (value: OptionalInputType) => {

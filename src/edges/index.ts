@@ -5,28 +5,38 @@ const graphColor: string = `#${import.meta.env.VITE_GRAPH_COLOR}`;
 
 const initialEdges = (inputValue: InputType, isDigraph: boolean): Edge[] => {
   const edges: Edge[] = [];
+  const addedEdges = new Set<string>();
   if (inputValue) {
     const dataArr: number[][] = inputValue?.arr;
 
     for (let i = 0; i < inputValue.n; i++) {
       for (let j = 0; j < inputValue.n; j++) {
-        if (dataArr?.[i]?.[j] && i != j) {
-          const edge: Edge = {
-            id: `${i}${j}`,
-            source: `${i}`,
-            target: `${j}`,
-            data: { label: `${dataArr?.[i]?.[j]}` },
-            type: "floating",
-          };
-          if (isDigraph) {
-            edge.markerEnd = {
-              type: MarkerType.ArrowClosed,
-              width: 20,
-              height: 20,
-            };
-          }
+        if (dataArr?.[i]?.[j] && i !== j) {
+          const edgeId = isDigraph
+            ? `${i}-${j}`
+            : `${Math.min(i, j)}-${Math.max(i, j)}`;
 
-          edges.push(edge);
+          // Check if the edge already exists (for undirected graphs)
+          if (!addedEdges.has(edgeId)) {
+            const edge: Edge = {
+              id: `${i}${j}`,
+              source: `${i}`,
+              target: `${j}`,
+              data: { label: `${dataArr[i][j]}` },
+              type: "floating",
+            };
+
+            if (isDigraph) {
+              edge.markerEnd = {
+                type: MarkerType.ArrowClosed,
+                width: 20,
+                height: 20,
+              };
+            }
+
+            edges.push(edge);
+            addedEdges.add(edgeId); // Track this edge as added
+          }
         }
       }
     }
