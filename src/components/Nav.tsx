@@ -48,7 +48,7 @@ export default function Nav() {
             onClick={() => handleClick(1)}
           />
           <Tab
-            label="Xem thêm"
+            label="Tổng hợp"
             {...a11yProps(2)}
             onClick={() => handleClick(2)}
           />

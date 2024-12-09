@@ -41,7 +41,7 @@ const More = () => {
   const [value, setValue] = useState<number>(0);
   const [inputValue, setInputValue] = useState<OptionalInputType>();
   const [outputValue, setOutputValue] = useState<Array<number>>([]);
-  const [, setOutputValueMST] = useState<Array<number[]>>([]);
+  const [outputValueMST, setOutputValueMST] = useState<Array<number[]>>([]);
   const [totalCost, setTotalCost] = useState(-1);
   const [error, setError] = useState("");
   const temp = useRef<number>(0);
@@ -342,7 +342,7 @@ const More = () => {
                   <Graph inputValue={inputValue} isDigraph={false} />
                   <Graph
                     inputValue={inputValue}
-                    outputValue={outputValue}
+                    outputValue={outputValueMST}
                     algo="MST"
                     isDigraph={false}
                   />
