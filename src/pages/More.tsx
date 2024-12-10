@@ -48,6 +48,7 @@ const More = () => {
   const [isDigraph, setIsDigraph] = useState<boolean>(false);
   const sortedPathArray = useRef<{ key: number; value: number }[]>([]);
   const [showGraph, setShowGraph] = useState(false);
+  const [minCost, setMinCost] = useState(0);
 
   useEffect(() => {
     if (inputValue) {
@@ -62,11 +63,14 @@ const More = () => {
           const dijkstra = new Dijkstra(
             inputValue.n,
             inputValue.start,
+            inputValue.endNode,
             inputValue.arr
           );
           const res = dijkstra.dijkstra();
+
           setOutputValue(res.path);
           setTotalCost(res.totalCost);
+          setMinCost(res.cost);
         }
         if (value === 2) {
           const dfs = new DFS(inputValue.n, inputValue.start, inputValue.arr);
@@ -240,33 +244,50 @@ const More = () => {
             </TabPanel>
             <TabPanel value={value} index={1}>
               {showGraph && (
-                <Stack
-                  direction="row"
-                  sx={{
-                    height: 400,
-                    border: 2,
-                    borderStyle: "dashed",
-                    borderColor: "secondary.main",
-                  }}
-                  key={temp.current}
-                  divider={
-                    <Box
+                <>
+                  <Stack>
+                    {minCost !== 999999 && (
+                      <Typography color="secondary" marginY={4} variant="h6">
+                        Chi phí nhỏ nhất từ đỉnh {inputValue.start} đến đỉnh{" "}
+                        {inputValue.endNode} là: {minCost}
+                      </Typography>
+                    )}
+                    {minCost === 999999 && (
+                      <Typography color="secondary" marginY={4} variant="h6">
+                        Không có đường đi từ {inputValue.start} đến{" "}
+                        {inputValue.endNode}
+                      </Typography>
+                    )}
+
+                    <Stack
+                      direction="row"
                       sx={{
-                        border: 1,
-                        borderStyle: "solid",
+                        height: 400,
+                        border: 2,
+                        borderStyle: "dashed",
                         borderColor: "secondary.main",
                       }}
-                    ></Box>
-                  }
-                >
-                  <Graph inputValue={inputValue} isDigraph={isDigraph} />
-                  <Graph
-                    inputValue={inputValue}
-                    outputValue={outputValue}
-                    isDigraph={isDigraph}
-                    algo="Dijkstra"
-                  />
-                </Stack>
+                      key={temp.current}
+                      divider={
+                        <Box
+                          sx={{
+                            border: 1,
+                            borderStyle: "solid",
+                            borderColor: "secondary.main",
+                          }}
+                        ></Box>
+                      }
+                    >
+                      <Graph inputValue={inputValue} isDigraph={isDigraph} />
+                      <Graph
+                        inputValue={inputValue}
+                        outputValue={outputValue}
+                        isDigraph={isDigraph}
+                        algo="Dijkstra"
+                      />
+                    </Stack>
+                  </Stack>
+                </>
               )}
             </TabPanel>
             <TabPanel value={value} index={2}>

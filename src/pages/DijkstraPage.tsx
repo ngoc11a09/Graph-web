@@ -32,6 +32,7 @@ export default function DijkstraPage() {
       const dijkstra = new Dijkstra(
         inputValue.n,
         inputValue.start,
+        0,
         inputValue.arr
       );
       const res = dijkstra.dijkstra();

@@ -3,14 +3,16 @@ export class Dijkstra {
 
   private n: number;
   private start: number;
+  private end: number;
   private arr: number[][];
   private isVisited: boolean[];
   private path: number[];
   private cost: number[];
 
-  constructor(n: number, start: number, arr: number[][]) {
+  constructor(n: number, start: number, end: number, arr: number[][]) {
     this.n = n;
     this.start = start;
+    this.end = end;
     this.arr = arr;
     this.isVisited = Array(this.n).fill(false);
     this.path = Array(this.n).fill(-1);
@@ -46,7 +48,21 @@ export class Dijkstra {
 
       totalCost += this.arr[i][this.path[i]];
     }
+    if (totalCost === this.maxInt) {
+      this.path = []; // Không có đường đi
+    }
 
-    return { totalCost, path: this.path };
+    const resultPath = [];
+    let current = this.end;
+    while (current !== -1) {
+      resultPath.unshift(current);
+      current = this.path[current];
+    }
+    const tracePath = Array(this.n).fill(-1);
+    for (let i = 1; i < resultPath.length; i++) {
+      tracePath[resultPath[i]] = resultPath[i - 1];
+    }
+
+    return { totalCost, path: tracePath, cost: this.cost[this.end] };
   };
 }

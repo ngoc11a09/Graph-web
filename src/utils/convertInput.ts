@@ -85,7 +85,8 @@ export const transformMatrix = (
   text: string,
   setTextValue: (value: string) => void,
   isDigraph: boolean,
-  startNode: boolean
+  startNode: boolean,
+  endNode?: number
 ): OptionalInputType => {
   const isSymmetricMatrix = (arr: Array<Array<number>>, n: number): boolean => {
     for (let i = 0; i < n; i++) {
@@ -150,7 +151,7 @@ export const transformMatrix = (
     .map((item) => item.map(Number));
   validateInput(n, start, arr);
 
-  return { n, start, arr };
+  return { n, start, endNode, arr };
 };
 
 /* 

@@ -34,6 +34,7 @@ export default function MatrixInput({
   const inputAreaId = useId();
   const nRef = useRef<HTMLInputElement | null>(null);
   const stRef = useRef<HTMLInputElement | null>(null);
+  const fiRef = useRef<HTMLInputElement | null>(null);
 
   const onChangeInput = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTextValue(e.target.value);
@@ -53,7 +54,8 @@ export default function MatrixInput({
         formJson.data as string,
         setTextValue,
         isDigraph,
-        !noStartNode
+        !noStartNode,
+        Number(fiRef.current?.value)
       );
       setInputValue(input);
       setError(" ");
@@ -146,6 +148,17 @@ export default function MatrixInput({
             type="number"
             defaultValue={0}
             inputRef={stRef}
+            inputProps={{
+              min: 0,
+              max: 10,
+              step: 1,
+            }}
+          />
+          <FormLabel>Đỉnh kết thúc</FormLabel>
+          <Input
+            type="number"
+            defaultValue={0}
+            inputRef={fiRef}
             inputProps={{
               min: 0,
               max: 10,
